@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'buttons.dart';
-
+import 'character.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -44,14 +44,7 @@ class _HomeState extends State<Home> {
                 color: Colors.blueAccent,
                 child: Stack(
                   children: [
-                    Container(
-                      alignment: Alignment(characterX, 1),
-                      child: Container(
-                        color: Colors.yellow,
-                        height: 50.0,
-                        width: 50.0,
-                      ),
-                    )
+                    Charecter(characterX: characterX),
                   ],
                 ))),
         Expanded(
