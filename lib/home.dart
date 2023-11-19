@@ -12,6 +12,11 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+ enum BallDirection{
+   BALLLEFT,
+   BALLRIGHT,
+  }
+
 class _HomeState extends State<Home> {
   static double characterX = 0;
   double lazerX = characterX;
@@ -20,6 +25,9 @@ class _HomeState extends State<Home> {
    
   double ballX=0.0;
   double ballY=0.0;
+  
+  var balldirection=BallDirection.BALLLEFT;
+  
   void moveRight() {
     setState(() {
       if (characterX + 0.1 > 1) {
@@ -72,10 +80,31 @@ class _HomeState extends State<Home> {
     isShooting = false;
     lazerX = characterX;
   }
+  void  gameloop(){
+     Timer.periodic(const Duration(milliseconds: 35), (timer) {
+      setState(() {
+         if (ballX- 0.01 < -1) {
+           balldirection= BallDirection.BALLRIGHT;
+         }
 
+         if (ballX + 0.01 > 1) {
+          balldirection=BallDirection.BALLLEFT;
+         }
+
+        if(balldirection==BallDirection.BALLLEFT){
+             ballX-=0.01;
+        }else{
+          ballX+=0.01;
+        }
+      });
+     });
+     
+  }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return GestureDetector( 
+      onTap: gameloop,
+      child:Column(
       children: [
         Expanded(
             //blue area
@@ -91,6 +120,7 @@ class _HomeState extends State<Home> {
                           height: lazerHeight,
                           width: 5.0,
                         )),
+                        
                         Ball(ballX: ballX,ballY: ballY,),
                     Charecter(characterX: characterX),
                   ],
@@ -109,6 +139,9 @@ class _HomeState extends State<Home> {
           ),
         ))
       ],
+    ),
     );
   }
 }
+
+
