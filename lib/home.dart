@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'buttons.dart';
 import 'character.dart';
+import 'ball.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,7 +17,9 @@ class _HomeState extends State<Home> {
   double lazerX = characterX;
   double lazerHeight = 15;
   bool isShooting = false;
-
+   
+  double ballX=0.0;
+  double ballY=0.0;
   void moveRight() {
     setState(() {
       if (characterX + 0.1 > 1) {
@@ -88,6 +91,7 @@ class _HomeState extends State<Home> {
                           height: lazerHeight,
                           width: 5.0,
                         )),
+                        Ball(ballX: ballX,ballY: ballY,),
                     Charecter(characterX: characterX),
                   ],
                 ))),
