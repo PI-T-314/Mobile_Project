@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'buttons.dart';
 import 'character.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -9,7 +12,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  double characterX = 0;
+  static double characterX = 0;
+  double lazerX = characterX;
+  double lazerHeight = 15;
+  bool isShooting = false;
 
   void moveRight() {
     setState(() {
@@ -17,6 +23,12 @@ class _HomeState extends State<Home> {
         //on the edge of the screen
       } else {
         characterX += 0.1;
+      }
+
+      if (isShooting) {
+        //laser should stay in the same position
+      } else {
+        lazerX = characterX;
       }
     });
   }
@@ -28,10 +40,35 @@ class _HomeState extends State<Home> {
       } else {
         characterX -= 0.1;
       }
+      if (isShooting) {
+        //laser should stay in the same position
+      } else {
+        lazerX = characterX;
+      }
     });
   }
 
-  void shoot() {}
+  void shoot() {
+    if (!isShooting) {
+      Timer.periodic(const Duration(milliseconds: 20), (timer) {
+        setState(() {
+          isShooting = true;
+          if (lazerHeight < MediaQuery.of(context).size.height * (3 / 4)) {
+            lazerHeight += 10;
+          } else {
+            laserTurnOff();
+            timer.cancel();
+          }
+        });
+      });
+    }
+  }
+
+  void laserTurnOff() {
+    lazerHeight = 15.0;
+    isShooting = false;
+    lazerX = characterX;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +81,13 @@ class _HomeState extends State<Home> {
                 color: Colors.blueAccent,
                 child: Stack(
                   children: [
+                    Container(
+                        alignment: Alignment(lazerX, 1),
+                        child: Container(
+                          color: Colors.red,
+                          height: lazerHeight,
+                          width: 5.0,
+                        )),
                     Charecter(characterX: characterX),
                   ],
                 ))),
