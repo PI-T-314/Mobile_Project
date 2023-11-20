@@ -11,7 +11,6 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: function,
-        
         child: Icon(icon, size: 50,)
     );
   }

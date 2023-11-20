@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Charecter extends StatelessWidget {
- const Charecter({required this.characterX, super.key});
+  const Charecter({required this.characterX, super.key});
 
- final  double characterX;
+  final double characterX;
   @override
   Widget build(BuildContext context) {
     return Container(
