@@ -17,8 +17,8 @@ class StartGame extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 color: Colors.grey,
                 child: const Text(
-                  "Tap To Start",
-                  style: TextStyle(fontSize: 20, color: Colors.white, decoration: TextDecoration.none,),
+                  "Tap To Start My Dear Student",
+                  style: TextStyle(fontSize: 15, color: Colors.white, decoration: TextDecoration.none,),
                 ),
               ),
             ));

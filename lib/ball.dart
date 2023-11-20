@@ -11,12 +11,9 @@ class Ball extends StatelessWidget {
     return Container(
         alignment: Alignment(ballX, ballY),
         child: Container(
-          width: 22.0,
-          height: 22.0,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.pink,
-          ),
+          width: 25.0,
+          height: 25.0,
+         child: Image.asset('assets/images/failing.png'),
         ));
   }
 }

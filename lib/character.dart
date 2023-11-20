@@ -9,9 +9,10 @@ class Charecter extends StatelessWidget {
     return Container(
         alignment: Alignment(characterX, 1),
         child: Container(
-          color: Colors.yellow,
-          height: 50.0,
-          width: 50.0,
+          
+          height: 54.0,
+          width: 75.0,
+           child: Image.asset('assets/images/failingsituation.jpeg', fit: BoxFit.fill,),
         ));
   }
 }
