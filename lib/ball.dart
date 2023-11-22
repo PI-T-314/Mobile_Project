@@ -10,7 +10,7 @@ class Ball extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment(ballX, ballY),
-        child: Container(
+        child: SizedBox(
           width: 25.0,
           height: 25.0,
          child: Image.asset('assets/images/failing.png'),

@@ -8,7 +8,7 @@ class Charecter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment(characterX, 1),
-        child: Container(
+        child: SizedBox(
           
           height: 54.0,
           width: 75.0,
