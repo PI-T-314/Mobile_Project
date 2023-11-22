@@ -35,59 +35,49 @@ class _HomeState extends State<Home> {
   var balldirection = BallDirection.BALLLEFT;
 
   void moveRight() {
-    if (characterX + 0.1 > 1) {
-      //on the edge of the screen
-    } else {
-      characterX += 0.1;
-    }
+      if (characterX + 0.1 > 1) {
+        //on the edge of the screen
+      } else {
+        characterX += 0.1;
+      }
 
-    if (isShooting) {
-      //lazer should stay in the same position
-    } else {
-      lazerX = characterX;
-    }
+      if (isShooting) {
+        //lazer should stay in the same position
+      } else {
+        lazerX = characterX;
+      }
   }
 
   void moveLeft() {
-    if (characterX - 0.1 < -1) {
-      //on the edge of the screen
-    } else {
-      characterX -= 0.1;
-    }
-    if (isShooting) {
-      //lazer should stay in the same position
-    } else {
-      lazerX = characterX;
-    }
+      if (characterX - 0.1 < -1) {
+        //on the edge of the screen
+      } else {
+        characterX -= 0.1;
+      }
+      if (isShooting) {
+        //lazer should stay in the same position
+      } else {
+        lazerX = characterX;
+      }
   }
 
   //funtions that tracks shootig
   void shoot() {
     if (!isShooting) {
       Timer.periodic(const Duration(milliseconds: 20), (timer) {
-        isShooting = true;
-        //if lazer height less than the height of the screen (multiplied by 3/4 since we used expanded and the blue area is 3/4 parts of the screen), else it resets the lazer
-        if (lazerHeight < MediaQuery.of(context).size.height * (3 / 4)) {
-          lazerHeight += 10;
-        } else {
-          lazerTurnOff();
-          timer.cancel();
-        }
-        //tracks if the lazer hits the ball, if it does it teleports the ball out of the screen in a random direction and sets its direction to the opposite part
-        if (ballY > heightToY(lazerHeight) && (ballX - lazerX).abs() < 0.03) {
-          timer.cancel();
-          lazerTurnOff();
-          score++;
-          Random random = Random();
-          double choice = (random.nextDouble() * 2) - 1;
-          if (choice > 0) {
-            ballX = 2;
-            balldirection = BallDirection.BALLLEFT;
+          isShooting = true;
+          //if lazer height less than the height of the screen (multiplied by 3/4 since we used expanded and the blue area is 3/4 parts of the screen), else it resets the lazer
+          if (lazerHeight < MediaQuery.of(context).size.height * (3 / 4)) {
+            lazerHeight += 10;
           } else {
-            ballX = -2;
-            balldirection = BallDirection.BALLRIGHT;
+            lazerTurnOff();
+            timer.cancel();
           }
-        }
+          //tracks if the lazer hits the ball, if it does it teleports the ball out of the screen in a random direction and sets its direction to the opposite part
+          if (ballY > heightToY(lazerHeight) && (ballX - lazerX).abs() < 0.03) {
+            timer.cancel();
+            respawnBall();
+          }
       });
     }
   }
@@ -179,10 +169,7 @@ class _HomeState extends State<Home> {
 //takes the height and returns the position on the y axis
   double heightToY(double height) {
     double totalHeight = MediaQuery.of(context).size.height * (3 / 4);
-    double Y = 1 -
-        2 *
-            (height /
-                totalHeight); // gets the proportion of the screen that the height is at vertically and multiplies it by 2 since the screen range is from -1 to 1
+    double Y = 1 - 2 * (height / totalHeight); // gets the proportion of the screen that the height is at vertically and multiplies it by 2 since the screen range is from -1 to 1
     return Y;
   }
 
@@ -205,7 +192,7 @@ class _HomeState extends State<Home> {
     ballX = 0.9;
     ballY = 1;
     isDead = false;
-    Navigator.pop(context); //removes the retry screen
+    Navigator.pop(context);//removes the retry screen
     gameStarted = false;
     gameLoop();
   }
