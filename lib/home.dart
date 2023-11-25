@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
       double time = 0;
       double velocity = 65;
       Timer.periodic(const Duration(milliseconds: 30), (timer) {
-        //inverse quadratic formula that allows the ball to jump in the shown trajectory
+        //inverse quadratic formula that allows the ball to jump in the shown trajectory (as earth's gravity)
         height = -5 * time * time + velocity * time;
         setState(() {
           ballY = heightToY(height);
